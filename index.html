@@ -1,0 +1,1685 @@
+<!DOCTYPE html><html lang="fr"><head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>L&#39;État de l&#39;Art de l&#39;Appariement du Capital Humain</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Canela:wght@300;400;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+    <style>
+        :root {
+            --primary: #1e293b;
+            --secondary: #64748b;
+            --accent: #3b82f6;
+            --background: #f8fafc;
+            --surface: #ffffff;
+            --text: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .font-canela {
+            font-family: 'Canela', serif;
+        }
+        
+        .toc-fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 280px;
+            height: 100vh;
+            background: var(--surface);
+            border-right: 1px solid var(--border);
+            overflow-y: auto;
+            z-index: 1000;
+            padding: 2rem 1.5rem;
+        }
+        
+        .main-content {
+            margin-left: 280px;
+            min-height: 100vh;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #334155 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.3);
+            mix-blend-mode: multiply;
+        }
+        
+        .bento-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+        
+        .toc-link {
+            display: block;
+            padding: 0.5rem 0;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: all 0.2s ease;
+            border-left: 2px solid transparent;
+            padding-left: 1rem;
+        }
+        
+        .toc-link:hover {
+            color: var(--accent);
+            border-left-color: var(--accent);
+        }
+        
+        .toc-link.active {
+            color: var(--accent);
+            border-left-color: var(--accent);
+            font-weight: 500;
+        }
+        
+        .section-card {
+            background: var(--surface);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border);
+        }
+        
+        .chart-container {
+            background: var(--surface);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border);
+        }
+        
+        .citation {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+            text-decoration: none;
+            margin-left: 0.25rem;
+            transition: all 0.2s ease;
+        }
+        
+        .citation:hover {
+            background: #2563eb;
+            transform: translateY(-1px);
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+            border-left: 4px solid var(--accent);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0.5rem;
+        }
+        
+        .metric-card {
+            background: var(--surface);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+        
+        .metric-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .mermaid-container {
+            display: flex;
+            justify-content: center;
+            min-height: 300px;
+            max-height: 800px;
+            background: #ffffff;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mermaid-container .mermaid {
+            width: 100%;
+            max-width: 100%;
+            height: 100%;
+            cursor: grab;
+            transition: transform 0.3s ease;
+            transform-origin: center center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            touch-action: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .mermaid-container .mermaid svg {
+            max-width: 100%;
+            height: 100%;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .mermaid-container .mermaid:active {
+            cursor: grabbing;
+        }
+
+        .mermaid-container.zoomed .mermaid {
+            height: 100%;
+            width: 100%;
+            cursor: grab;
+        }
+
+        .mermaid-controls {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 20;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 8px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .mermaid-control-btn {
+            background: #ffffff;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            padding: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #374151;
+            font-size: 14px;
+            min-width: 36px;
+            height: 36px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mermaid-control-btn:hover {
+            background: #f8fafc;
+            border-color: #3b82f6;
+            color: #3b82f6;
+            transform: translateY(-1px);
+        }
+
+        .mermaid-control-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Enhanced mermaid styling for better contrast and unified design */
+        .mermaid .node rect,
+        .mermaid .node circle,
+        .mermaid .node ellipse,
+        .mermaid .node polygon {
+            stroke-width: 2px !important;
+            filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+        }
+        
+        .mermaid .node .label {
+            color: #1e293b !important;
+            font-weight: 500 !important;
+            font-size: 13px !important;
+            font-family: 'Inter', sans-serif !important;
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+        }
+        
+        .mermaid .edgePath .path {
+            stroke-width: 2px !important;
+            stroke: #64748b !important;
+            filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.1));
+        }
+        
+        .mermaid .edgeLabel {
+            background-color: rgba(255, 255, 255, 0.95) !important;
+            border-radius: 6px !important;
+            padding: 4px 8px !important;
+            border: 1px solid #e2e8f0 !important;
+            font-weight: 500 !important;
+            color: #475569 !important;
+            font-size: 11px !important;
+            font-family: 'Inter', sans-serif !important;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+        }
+
+        /* Different node colors with proper contrast */
+        .mermaid .node:nth-child(4n+1) rect,
+        .mermaid .node:nth-child(4n+1) circle,
+        .mermaid .node:nth-child(4n+1) ellipse,
+        .mermaid .node:nth-child(4n+1) polygon {
+            fill: #dbeafe !important;
+            stroke: #2563eb !important;
+        }
+        
+        .mermaid .node:nth-child(4n+2) rect,
+        .mermaid .node:nth-child(4n+2) circle,
+        .mermaid .node:nth-child(4n+2) ellipse,
+        .mermaid .node:nth-child(4n+2) polygon {
+            fill: #dcfce7 !important;
+            stroke: #16a34a !important;
+        }
+        
+        .mermaid .node:nth-child(4n+3) rect,
+        .mermaid .node:nth-child(4n+3) circle,
+        .mermaid .node:nth-child(4n+3) ellipse,
+        .mermaid .node:nth-child(4n+3) polygon {
+            fill: #fef3c7 !important;
+            stroke: #d97706 !important;
+        }
+        
+        .mermaid .node:nth-child(4n+4) rect,
+        .mermaid .node:nth-child(4n+4) circle,
+        .mermaid .node:nth-child(4n+4) ellipse,
+        .mermaid .node:nth-child(4n+4) polygon {
+            fill: #fce7f3 !important;
+            stroke: #be185d !important;
+        }
+        
+        /* Ensure text readability on all backgrounds */
+        .mermaid .node:nth-child(4n+1) .label {
+            color: #1e40af !important;
+        }
+        
+        .mermaid .node:nth-child(4n+2) .label {
+            color: #15803d !important;
+        }
+        
+        .mermaid .node:nth-child(4n+3) .label {
+            color: #92400e !important;
+        }
+        
+        .mermaid .node:nth-child(4n+4) .label {
+            color: #be185d !important;
+        }
+
+        /* Responsive adjustments for mermaid controls */
+        @media (max-width: 1024px) {
+            .toc-fixed {
+                display: none;
+            }
+            .main-content {
+                margin-left: 0;
+            }
+            .bento-grid {
+                grid-template-columns: 1fr;
+            }
+            /* Adjust hero section padding for small screens */
+            .hero-section h1 {
+                font-size: 2.5rem; /* Reduced from 5xl */
+            }
+            .hero-section p {
+                font-size: 1.125rem; /* Reduced from xl */
+            }
+            .hero-section .container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+        }
+
+        /* Additional adjustments for very small screens */
+        @media (max-width: 640px) {
+            .hero-section h1 {
+                font-size: 2rem; /* Further reduced for small screens */
+            }
+            .hero-section p {
+                font-size: 1rem;
+            }
+            .hero-section .grid-cols-2 {
+                grid-template-columns: 1fr; /* Single column for stats */
+            }
+        }
+    </style>
+  <base target="_blank">
+</head>
+
+  <body>
+    <!-- Fixed Table of Contents -->
+    <nav class="toc-fixed">
+      <div class="mb-6">
+        <h3 class="font-canela font-bold text-lg text-gray-900 mb-4">Table des Matières</h3>
+      </div>
+      <div class="space-y-1">
+        <a href="#introduction" class="toc-link">Introduction</a>
+        <a href="#fondamentaux" class="toc-link">1. Fondamentaux et Architecture</a>
+        <a href="#recrutement-externe" class="toc-link">2. Recrutement Externe</a>
+        <a href="#mobilite-interne" class="toc-link">3. Mobilité et Staffing Interne</a>
+        <a href="#considerations-transversales" class="toc-link">4. Considérations Transversales</a>
+        <a href="#tendances-emergentes" class="toc-link">5. Tendances Émergentes</a>
+      </div>
+
+      <div class="mt-8 pt-6 border-t border-gray-200">
+        <p class="text-xs text-gray-500 mb-2">Performance Clé</p>
+        <div class="metric-card">
+          <div class="text-2xl font-bold text-blue-600">85%</div>
+          <div class="text-sm text-gray-600">Précision Matching</div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- Hero Section -->
+      <section class="hero-section py-16">
+        <div class="hero-overlay"></div>
+        <div class="container mx-auto px-8 relative z-10">
+          <div class="bento-grid">
+            <div>
+              <h1 class="font-canela text-5xl font-bold mb-6 leading-tight">
+                <em class="italic">Optimisation et Automatisation</em>
+                <br/>
+                de l&#39;Appariement du Capital Humain
+              </h1>
+              <p class="text-xl mb-8 text-blue-100 max-w-2xl">
+                L&#39;état de l&#39;art des systèmes de matching IA pour le recrutement et la mobilité interne,
+                de l&#39;extraction sémantique aux algorithmes de recommandation contextuelle.
+              </p>
+              <div class="flex items-center space-x-4">
+                <div class="flex items-center text-blue-200">
+                  <i class="fas fa-chart-line mr-2"></i>
+                  <span>Analyse approfondie</span>
+                </div>
+                <div class="flex items-center text-blue-200">
+                  <i class="fas fa-brain mr-2"></i>
+                  <span>IA avancée</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+              <h3 class="font-canela text-xl font-semibold mb-4">Points Clés</h3>
+              <div class="space-y-3 text-sm">
+                <div class="flex items-center">
+                  <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                  <span>Transition vers l&#39;analyse sémantique profonde</span>
+                </div>
+                <div class="flex items-center">
+                  <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                  <span>Extraction automatique des compétences</span>
+                </div>
+                <div class="flex items-center">
+                  <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                  <span>Cartographie dynamique des compétences</span>
+                </div>
+                <div class="flex items-center">
+                  <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                  <span>Optimisation en temps réel</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Introduction -->
+      <section id="introduction" class="py-12 px-8">
+        <div class="container mx-auto max-w-4xl">
+          <div class="section-card">
+            <h2 class="font-canela text-3xl font-bold mb-6">Introduction</h2>
+            <p class="text-lg text-gray-700 mb-6">
+              L&#39;appariement du capital humain représente l&#39;un des défis les plus complexes de la gestion des ressources humaines modernes.
+              Confrontées à des volumes croissants de candidatures et à une demande toujours plus spécifique en compétences,
+              les organisations doivent faire évoluer leurs pratiques de recrutement et de mobilité interne.
+            </p>
+
+            <div class="highlight-box">
+              <h3 class="font-canela text-xl font-semibold mb-3">Enjeux Stratégiques</h3>
+              <p class="text-gray-700">
+                La transformation numérique impose une nouvelle approche de l&#39;appariement candidat-poste,
+                passant du filtrage basique par mots-clés à une compréhension sémantique profonde des profils professionnels.
+                Cette évolution se traduit par des gains substantiels en efficacité et en qualité de recrutement.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Fondamentaux et Architecture -->
+      <section id="fondamentaux" class="py-12 px-8 bg-gray-50">
+        <div class="container mx-auto max-w-6xl">
+          <h2 class="font-canela text-4xl font-bold mb-8 text-center">1. Fondamentaux et Architecture des Systèmes de Matching IA</h2>
+
+          <div class="section-card">
+            <h3 class="font-canela text-2xl font-semibold mb-4">Évolution Paradigmatique</h3>
+            <p class="text-gray-700 mb-6">
+              Les systèmes traditionnels de filtrage basés sur TF-IDF présentent des limitations structurelles majeures.
+              Les études montrent que jusqu&#39;à 40% des compétences pertinentes demeurent non détectées par les approches lexicales pures
+              <a href="https://ulopenaccess.com/papers/ULETE_V02I04/ULETE20250204_004.pdf" class="citation" target="_blank">[73]</a>.
+            </p>
+
+            <div class="grid grid-cols-3 gap-6 mb-8">
+              <div class="metric-card">
+                <div class="text-3xl font-bold text-red-600 mb-2">30-50%</div>
+                <div class="text-sm text-gray-600">Taux de faux négatifs des approches traditionnelles</div>
+              </div>
+              <div class="metric-card">
+                <div class="text-3xl font-bold text-green-600 mb-2">81-84%</div>
+                <div class="text-sm text-gray-600">Score F1 des modèles BERT fine-tunés</div>
+              </div>
+              <div class="metric-card">
+                <div class="text-3xl font-bold text-blue-600 mb-2">10-15%</div>
+                <div class="text-sm text-gray-600">Amélioration des métriques de ranking</div>
+              </div>
+            </div>
+
+            <h4 class="font-canela text-xl font-semibold mb-4">Pipeline Générique des Systèmes Modernes</h4>
+
+            <div class="mermaid-container">
+              <div class="mermaid-controls">
+                <button class="mermaid-control-btn zoom-in" title="放大">
+                  <i class="fas fa-search-plus"></i>
+                </button>
+                <button class="mermaid-control-btn zoom-out" title="缩小">
+                  <i class="fas fa-search-minus"></i>
+                </button>
+                <button class="mermaid-control-btn reset-zoom" title="重置">
+                  <i class="fas fa-expand-arrows-alt"></i>
+                </button>
+                <button class="mermaid-control-btn fullscreen" title="全屏查看">
+                  <i class="fas fa-expand"></i>
+                </button>
+              </div>
+              <div class="mermaid">
+                graph TD
+                A[&#34;Ingestion Multi-Sources&#34;] --&gt; B[&#34;Parsing Intelligent&#34;]
+                B --&gt; C[&#34;Normalisation Sémantique&#34;]
+                C --&gt; D[&#34;Encodage Vectoriel&#34;]
+                D --&gt; E[&#34;Calcul de Similarité&#34;]
+                E --&gt; F[&#34;Ranking et Présentation&#34;]
+
+                style A fill:#e3f2fd,stroke:#1976d2,stroke-width:2px,color:#1e293b
+                style B fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#1e293b
+                style C fill:#e8f5e8,stroke:#388e3c,stroke-width:2px,color:#1e293b
+                style D fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#1e293b
+                style E fill:#fce4ec,stroke:#c2185b,stroke-width:2px,color:#1e293b
+                style F fill:#f1f8e9,stroke:#689f38,stroke-width:2px,color:#1e293b
+              </div>
+            </div>
+
+            <div class="mt-8">
+              <h4 class="font-canela text-xl font-semibold mb-4">Métriques d&#39;Évaluation Standardisées</h4>
+              <div class="grid grid-cols-2 gap-8">
+                <div>
+                  <h5 class="font-semibold mb-3">Métriques de Ranking</h5>
+                  <ul class="space-y-2 text-sm">
+                    <li><strong>NDCG@K:</strong> 0,75-0,85 @10
+                      <a href="https://ulopenaccess.com/papers/ULETE_V02I04/ULETE20250204_004.pdf" class="citation" target="_blank">[39]</a>
+                    </li>
+                    <li><strong>MAP:</strong> 0,45-0,65</li>
+                    <li><strong>MRR:</strong> 0,82-0,98</li>
+                    <li><strong>Precision@K:</strong> 0,60-0,75 @10</li>
+                  </ul>
+                </div>
+                <div>
+                  <h5 class="font-semibold mb-3">Métriques Métier</h5>
+                  <ul class="space-y-2 text-sm">
+                    <li><strong>Time-to-hire:</strong> Réduction 40-60%
+                      <a href="https://x0pa.com/glossary/predictive-job-matching/" class="citation" target="_blank">[116]</a>
+                    </li>
+                    <li><strong>Quality-of-hire:</strong> +20-35%</li>
+                    <li><strong>Taux de conversion:</strong> +30-50%
+                      <a href="https://www.smartrecruiters.com/recruiting-software/talent-matching/" class="citation" target="_blank">[121]</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Recrutement Externe -->
+      <section id="recrutement-externe" class="py-12 px-8">
+        <div class="container mx-auto max-w-6xl">
+          <h2 class="font-canela text-4xl font-bold mb-8 text-center">2. Volet Recrutement Externe (Sourcing)</h2>
+
+          <div class="section-card">
+            <h3 class="font-canela text-2xl font-semibold mb-4">Extraction Automatisée d&#39;Informations</h3>
+
+            <div class="grid grid-cols-2 gap-8 mb-8">
+              <div>
+                <h4 class="font-semibold mb-3">Techniques de Parsing Intelligent</h4>
+                <p class="text-gray-700 mb-4">
+                  Les modèles Transformer révolutionnent l&#39;extraction d&#39;informations depuis des documents hétérogènes.
+                  Le modèle combinant GPT-4o et réseau neuronal hiérarchique atteint une accuracy de 0,89
+                  pour l&#39;extraction de features CV <a href="https://www.sciencedirect.com/org/science/article/pii/S1546223425000097" class="citation" target="_blank">[109]</a>.
+                </p>
+
+                <div class="bg-blue-50 p-4 rounded-lg">
+                  <h5 class="font-semibold mb-2">Architecture Multi-Niveaux</h5>
+                  <ul class="text-sm space-y-1">
+                    <li>• Niveau documentaire : segmentation sémantique</li>
+                    <li>• Niveau intra-section : extraction structurée</li>
+                    <li>• Niveau sémantique : inférence de compétences</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div>
+                <img src="https://kimi-web-img.moonshot.cn/img/img.tusij.com/6b67524f41ffc951a42ba4b36607a5e67babc636.jpg!w390" alt="Analyse de CV par intelligence artificielle" class="rounded-lg shadow-md w-full h-64 object-cover" size="medium" aspect="wide" query="AI CV parsing technology" referrerpolicy="no-referrer" data-modified="1" data-score="0.00"/>
+              </div>
+            </div>
+
+            <h4 class="font-canela text-xl font-semibold mb-4">Algorithmes de Matching Score</h4>
+
+            <div class="overflow-x-auto mb-8">
+              <table class="w-full border-collapse border border-gray-300 text-sm">
+                <thead>
+                  <tr class="bg-gray-100">
+                    <th class="border border-gray-300 p-3 text-left">Architecture</th>
+                    <th class="border border-gray-300 p-3 text-left">Avantages</th>
+                    <th class="border border-gray-300 p-3 text-left">Limitations</th>
+                    <th class="border border-gray-300 p-3 text-left">Performance</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="border border-gray-300 p-3 font-semibold">Bi-encodeurs</td>
+                    <td class="border border-gray-300 p-3">Efficacité, précomputabilité</td>
+                    <td class="border border-gray-300 p-3">Interactions limitées</td>
+                    <td class="border border-gray-300 p-3">&lt; 100 ms</td>
+                  </tr>
+                  <tr>
+                    <td class="border border-gray-300 p-3 font-semibold">Cross-encodeurs</td>
+                    <td class="border border-gray-300 p-3">Précision maximale</td>
+                    <td class="border border-gray-300 p-3">Complexité quadratique</td>
+                    <td class="border border-gray-300 p-3">1-10 s</td>
+                  </tr>
+                  <tr>
+                    <td class="border border-gray-300 p-3 font-semibold">Architectures hybrides</td>
+                    <td class="border border-gray-300 p-3">Combinaison optimale</td>
+                    <td class="border border-gray-300 p-3">Complexité de mise en œuvre</td>
+                    <td class="border border-gray-300 p-3">90-95% performance</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="highlight-box">
+              <h4 class="font-canela text-xl font-semibold mb-3">Modèles Spécialisés</h4>
+              <p class="text-gray-700 mb-4">
+                Les modèles domain-specific comme JobBERT et ResumeBERT affichent des gains de performance significatifs :
+              </p>
+              <div class="grid grid-cols-3 gap-4">
+                <div class="text-center">
+                  <div class="text-2xl font-bold text-blue-600">94,2%</div>
+                  <div class="text-sm text-gray-600">Précision classification JobBERT
+                    <a href="https://ulopenaccess.com/papers/ULETE_V02I04/ULETE20250204_004.pdf" class="citation" target="_blank">[39]</a>
+                  </div>
+                </div>
+                <div class="text-center">
+                  <div class="text-2xl font-bold text-green-600">96,2%</div>
+                  <div class="text-sm text-gray-600">Précision NER ResumeBERT
+                    <a href="https://iaeme.com/MasterAdmin/Journal_uploads/IJITMIS/VOLUME_16_ISSUE_1/IJITMIS_16_01_080.pdf" class="citation" target="_blank">[76]</a>
+                  </div>
+                </div>
+                <div class="text-center">
+                  <div class="text-2xl font-bold text-purple-600">15%</div>
+                  <div class="text-sm text-gray-600">Amélioration NDCG CareerBERT</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="section-card">
+            <h3 class="font-canela text-2xl font-semibold mb-4">Classement et Recommandation des Candidats (Top N)</h3>
+
+            <div class="grid grid-cols-2 gap-8 mb-6">
+              <div>
+                <h4 class="font-semibold mb-3">Optimisation pour la Décision RH</h4>
+                <p class="text-gray-700 mb-4">
+                  Les systèmes modernes génèrent des explications structurées des recommandations,
+                  facilitant la compréhension et la validation par les recruteurs. Les techniques
+                  d&#39;explicabilité comme SHAP et LIME permettent une attribution de contribution par feature.
+                </p>
+
+                <div class="bg-green-50 p-4 rounded-lg">
+                  <h5 class="font-semibold mb-2">Justification Typique</h5>
+                  <p class="text-sm italic">
+                    &#34;Ce candidat obtient un score élevé grâce à sa maîtrise de Python (+0,15)
+                    et son expérience en machine learning (+0,12), mais est pénalisé par son
+                    manque d&#39;expérience en management d&#39;équipe (-0,08).&#34;
+                  </p>
+                </div>
+              </div>
+
+              <div>
+                <img src="https://kimi-web-img.moonshot.cn/img/cdn.prod.website-files.com/f026237614f725ea8627078ac83968dc210164b3.png" alt="Interface de classement de candidats avec visualisation de données" class="rounded-lg shadow-md w-full h-64 object-cover" size="medium" aspect="wide" style="photo" query="interface classement candidats recrutement" referrerpolicy="no-referrer" data-modified="1" data-score="0.00"/>
+              </div>
+            </div>
+
+            <h4 class="font-canela text-xl font-semibold mb-4">Apprentissage Continu et Feedback Loop</h4>
+
+            <div class="overflow-x-auto">
+              <table class="w-full border-collapse border border-gray-300 text-sm">
+                <thead>
+                  <tr class="bg-gray-100">
+                    <th class="border border-gray-300 p-3 text-left">Signal de Feedback</th>
+                    <th class="border border-gray-300 p-3 text-left">Type</th>
+                    <th class="border border-gray-300 p-3 text-left">Pondération</th>
+                    <th class="border border-gray-300 p-3 text-left">Impact Modèle</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="border border-gray-300 p-3">Clic sur profil</td>
+                    <td class="border border-gray-300 p-3"><span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs">Implicite</span></td>
+                    <td class="border border-gray-300 p-3">Faible</td>
+                    <td class="border border-gray-300 p-3">Intérêt initial</td>
+                  </tr>
+                  <tr>
+                    <td class="border border-gray-300 p-3">Invitation entretien</td>
+                    <td class="border border-gray-300 p-3"><span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">Explicite</span></td>
+                    <td class="border border-gray-300 p-3">Forte</td>
+                    <td class="border border-gray-300 p-3">Pertinence validée</td>
+                  </tr>
+                  <tr>
+                    <td class="border border-gray-300 p-3">Embauche</td>
+                    <td class="border border-gray-300 p-3"><span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">Explicite</span></td>
+                    <td class="border border-gray-300 p-3">Maximale</td>
+                    <td class="border border-gray-300 p-3">Succès complet</td>
+                  </tr>
+                  <tr>
+                    <td class="border border-gray-300 p-3">Performance post-embauche</td>
+                    <td class="border border-gray-300 p-3"><span class="bg-purple-100 text-purple-800 px-2 py-1 rounded text-xs">Explicite</span></td>
+                    <td class="border border-gray-300 p-3">Référence</td>
+                    <td class="border border-gray-300 p-3">Quality-of-hire</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Mobilité et Staffing Interne -->
+      <section id="mobilite-interne" class="py-12 px-8 bg-gray-50">
+        <div class="container mx-auto max-w-6xl">
+          <h2 class="font-canela text-4xl font-bold mb-8 text-center">3. Volet Mobilité et Staffing Interne</h2>
+
+          <div class="section-card">
+            <h3 class="font-canela text-2xl font-semibold mb-4">Cartographie Dynamique des Compétences Internes</h3>
+
+            <div class="mermaid-container mb-8">
+              <div class="mermaid-controls">
+                <button class="mermaid-control-btn zoom-in" title="放大">
+                  <i class="fas fa-search-plus"></i>
+                </button>
+                <button class="mermaid-control-btn zoom-out" title="缩小">
+                  <i class="fas fa-search-minus"></i>
+                </button>
+                <button class="mermaid-control-btn reset-zoom" title="重置">
+                  <i class="fas fa-expand-arrows-alt"></i>
+                </button>
+                <button class="mermaid-control-btn fullscreen" title="全屏查看">
+                  <i class="fas fa-expand"></i>
+                </button>
+              </div>
+              <div class="mermaid">
+                graph LR
+                A[&#34;CV et Profils RH&#34;] --&gt; E[&#34;Skill Graph&#34;]
+                B[&#34;Évaluations Performance&#34;] --&gt; E
+                C[&#34;Projets et Missions&#34;] --&gt; E
+                D[&#34;Formations et Certifications&#34;] --&gt; E
+                E --&gt; F[&#34;Inférence de Compétences&#34;]
+                E --&gt; G[&#34;Prédiction Trajectoires&#34;]
+                E --&gt; H[&#34;Recommandations Mobilité&#34;]
+
+                style A fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#1e293b
+                style B fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e293b
+                style C fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#1e293b
+                style D fill:#fce7f3,stroke:#be185d,stroke-width:2px,color:#1e293b
+                style E fill:#f1f5f9,stroke:#64748b,stroke-width:2px,color:#1e293b
+                style F fill:#f0f9ff,stroke:#0284c7,stroke-width:2px,color:#1e293b
+                style G fill:#ecfdf5,stroke:#059669,stroke-width:2px,color:#1e293b
+                style H fill:#fdf2f8,stroke:#c026d3,stroke-width:2px,color:#1e293b
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-8 mb-8">
+              <div>
+                <h4 class="font-semibold mb-3">Multi-Sources d&#39;Agrégation</h4>
+                <div class="space-y-3">
+                  <div class="flex items-center p-3 bg-yellow-50 rounded-lg">
+                    <i class="fas fa-file-alt text-yellow-600 mr-3"></i>
+                    <div>
+                      <div class="font-semibold text-sm">CV et Profils RH</div>
+                      <div class="text-xs text-gray-600">Compétences déclarées, fiabilité moyenne</div>
+                    </div>
+                  </div>
+                  <div class="flex items-center p-3 bg-blue-50 rounded-lg">
+                    <i class="fas fa-chart-line text-blue-600 mr-3"></i>
+                    <div>
+                      <div class="font-semibold text-sm">Évaluations Performance</div>
+                      <div class="text-xs text-gray-600">Validation managériale, fiabilité élevée</div>
+                    </div>
+                  </div>
+                  <div class="flex items-center p-3 bg-green-50 rounded-lg">
+                    <i class="fas fa-project-diagram text-green-600 mr-3"></i>
+                    <div>
+                      <div class="font-semibold text-sm">Projets et Missions</div>
+                      <div class="text-xs text-gray-600">Preuve comportementale, fiabilité très élevée</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <h4 class="font-semibold mb-3">Comparaison Approches</h4>
+                <div class="bg-white p-4 rounded-lg border">
+                  <div class="space-y-4">
+                    <div>
+                      <h5 class="font-medium text-sm mb-2">Modèles Plats (MLP)</h5>
+                      <div class="flex justify-between items-center">
+                        <span class="text-xs">Balanced Accuracy</span>
+                        <span class="font-bold text-red-600">55,0%</span>
+                      </div>
+                      <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div class="bg-red-500 h-2 rounded-full" style="width: 55%"></div>
+                      </div>
+                      <div class="text-xs text-gray-600 mt-1">Détection candidats qualifiés: &lt; 10%</div>
+                    </div>
+
+                    <div>
+                      <h5 class="font-medium text-sm mb-2">Graph Neural Networks</h5>
+                      <div class="flex justify-between items-center">
+                        <span class="text-xs">Balanced Accuracy</span>
+                        <span class="font-bold text-green-600">65,4%</span>
+                      </div>
+                      <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div class="bg-green-500 h-2 rounded-full" style="width: 65.4%"></div>
+                      </div>
+                      <div class="text-xs text-gray-600 mt-1">Détection candidats qualifiés: 48,9%
+                        <a href="https://ulopenaccess.com/papers/ULETE_V02I04/ULETE20250204_004.pdf" class="citation" target="_blank">[108]</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <h4 class="font-canela text-xl font-semibold mb-4">Inférence de Compétences Implicites</h4>
+            <p class="text-gray-700 mb-4">
+              L&#39;analyse de trajectoires de carrière permet d&#39;inférer des compétences non explicitement documentées.
+              Les modèles de séquence identifient les patterns typiques de progression et détectent les potentiels non reconnus.
+            </p>
+
+            <div class="bg-indigo-50 p-4 rounded-lg mb-6">
+              <h5 class="font-semibold mb-2">Exemples de Propagation Sémantique</h5>
+              <div class="grid grid-cols-3 gap-4 text-sm">
+                <div>
+                  <div class="font-medium mb-1">Propagation Ontologique</div>
+                  <div class="text-gray-600">Kubernetes → Docker, orchestration, DevOps</div>
+                </div>
+                <div>
+                  <div class="font-medium mb-1">Propagation Statistique</div>
+                  <div class="text-gray-600">React → Redux, Next.js, TypeScript</div>
+                </div>
+                <div>
+                  <div class="font-medium mb-1">Propagation Vectorielle</div>
+                  <div class="text-gray-600">&#34;Gestion projet agile&#34; → Scrum, Kanban, SAFe</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="section-card">
+            <h3 class="font-canela text-2xl font-semibold mb-4">Matching Projet-Profil pour le Staffing Interne</h3>
+
+            <div class="grid grid-cols-2 gap-8 mb-6">
+              <div>
+                <h4 class="font-semibold mb-3">Spécificités du Matching Interne</h4>
+                <p class="text-gray-700 mb-4">
+                  Le staffing interne bénéficie d&#39;une richesse d&#39;information inaccessible dans le recrutement externe :
+                  historique de performance, collaborations passées, objectifs de développement de carrière.
+                </p>
+
+                <div class="space-y-3">
+                  <div class="flex items-start">
+                    <i class="fas fa-history text-blue-600 mr-3 mt-1"></i>
+                    <div>
+                      <div class="font-semibold text-sm">Validation Empirique</div>
+                      <div class="text-xs text-gray-600">Évaluations managériales, objectifs atteints</div>
+                    </div>
+                  </div>
+                  <div class="flex items-start">
+                    <i class="fas fa-users text-green-600 mr-3 mt-1"></i>
+                    <div>
+                      <div class="font-semibold text-sm">Optimisation d&#39;Équipe</div>
+                      <div class="text-xs text-gray-600">Éviter les frictions, favoriser les synergies</div>
+                    </div>
+                  </div>
+                  <div class="flex items-start">
+                    <i class="fas fa-route text-purple-600 mr-3 mt-1"></i>
+                    <div>
+                      <div class="font-semibold text-sm">Alignement Carrière</div>
+                      <div class="text-xs text-gray-600">Double optimisation performance/développement</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <img src="https://kimi-web-img.moonshot.cn/img/st.focusedcollection.com/32f6be2675e07979e0d49129dece05d7bb3ec9e8.jpg" alt="Collaborateurs travaillant ensemble dans un environnement professionnel moderne" class="rounded-lg shadow-md w-full h-64 object-cover" size="medium" aspect="wide" style="photo" query="collaborateurs travaillant ensemble" referrerpolicy="no-referrer" data-modified="1" data-score="0.00"/>
+              </div>
+            </div>
+
+            <h4 class="font-canela text-xl font-semibold mb-4">Algorithmes d&#39;Optimisation Combinatoire</h4>
+
+            <div class="bg-white p-6 rounded-lg border mb-6">
+              <h5 class="font-semibold mb-3">Formulation Mathématique du Problème</h5>
+              <div class="bg-gray-50 p-4 rounded font-mono text-sm mb-4">
+                <div class="text-gray-700">Maximiser Σᵢⱼₖ (score_matchingᵢⱼ × productivitéᵢ × prioritéⱼ × disponibilitéᵢₖ)</div>
+                <div class="text-gray-500 mt-2">Sous contraintes :</div>
+                <div class="text-gray-600">• Chaque collaborateur : Σⱼₖ xᵢⱼₖ ≤ capacitéᵢ</div>
+                <div class="text-gray-600">• Chaque projet : Σᵢ xᵢⱼₖ = besoinⱼₖ</div>
+                <div class="text-gray-600">• Compétences requises : Σᵢ xᵢⱼₖ × compétenceᵢ,comp ≥ seuilⱼ,comp</div>
+              </div>
+
+              <div class="grid grid-cols-3 gap-4 text-sm">
+                <div class="text-center">
+                  <div class="font-semibold text-blue-600">Programmation Linéaire</div>
+                  <div class="text-gray-600">Gurobi, CPLEX</div>
+                  <div class="text-xs">Instances réalistes</div>
+                </div>
+                <div class="text-center">
+                  <div class="font-semibold text-green-600">Algorithmes Génétiques</div>
+                  <div class="text-gray-600">Optimisation multi-objectifs</div>
+                  <div class="text-xs">Grandes instances</div>
+                </div>
+                <div class="text-center">
+                  <div class="font-semibold text-purple-600">Simulation Monte-Carlo</div>
+                  <div class="text-gray-600">Analyse de robustesse</div>
+                  <div class="text-xs">Scénarios alternatifs</div>
+                </div>
+              </div>
+            </div>
+
+            <h4 class="font-canela text-xl font-semibold mb-4">Intégration de la Dimension Disponibilité</h4>
+
+            <div class="grid grid-cols-4 gap-4 mb-6">
+              <div class="metric-card">
+                <div class="text-2xl font-bold text-green-600 mb-2">Disponible</div>
+                <div class="text-sm text-gray-600">Aucun engagement</div>
+              </div>
+              <div class="metric-card">
+                <div class="text-2xl font-bold text-blue-600 mb-2">Engagé</div>
+                <div class="text-sm text-gray-600">Affectation partielle</div>
+              </div>
+              <div class="metric-card">
+                <div class="text-2xl font-bold text-red-600 mb-2">Indisponible</div>
+                <div class="text-sm text-gray-600">Congé, formation</div>
+              </div>
+              <div class="metric-card">
+                <div class="text-2xl font-bold text-yellow-600 mb-2">Incertain</div>
+                <div class="text-sm text-gray-600">Probabilité variable</div>
+              </div>
+            </div>
+
+            <p class="text-gray-700">
+              La modélisation temporelle granulaire permet une optimisation en temps réel de l&#39;allocation,
+              avec des systèmes de recommandation contextuelle pour les nouveaux besoins et des mécanismes
+              de prévention du surbooking.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Considérations Transversales -->
+      <section id="considerations-transversales" class="py-12 px-8">
+        <div class="container mx-auto max-w-6xl">
+          <h2 class="font-canela text-4xl font-bold mb-8 text-center">4. Considérations Transversales et Défis</h2>
+
+          <div class="section-card">
+            <h3 class="font-canela text-2xl font-semibold mb-4">Équité, Biais et Conformité Éthique</h3>
+
+            <div class="grid grid-cols-2 gap-8 mb-8">
+              <div>
+                <h4 class="font-semibold mb-3">Sources de Biais</h4>
+                <div class="space-y-3">
+                  <div class="p-3 bg-red-50 rounded-lg border-l-4 border-red-400">
+                    <div class="font-medium text-sm mb-1">Biais Historiques</div>
+                    <div class="text-xs text-gray-600">Données d&#39;entraînement reflétant les discriminations passées</div>
+                  </div>
+                  <div class="p-3 bg-orange-50 rounded-lg border-l-4 border-orange-400">
+                    <div class="font-medium text-sm mb-1">Biais de Formulation</div>
+                    <div class="text-xs text-gray-600">Langage genré ou culturellement spécifique des offres</div>
+                  </div>
+                  <div class="p-3 bg-yellow-50 rounded-lg border-l-4 border-yellow-400">
+                    <div class="font-medium text-sm mb-1">Biais d&#39;Évaluation</div>
+                    <div class="text-xs text-gray-600">Feedback humain sujet à des biais cognitifs</div>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <h4 class="font-semibold mb-3">Techniques de Mitigation</h4>
+                <div class="space-y-3">
+                  <div class="flex items-center p-3 bg-blue-50 rounded-lg">
+                    <i class="fas fa-balance-scale text-blue-600 mr-3"></i>
+                    <div>
+                      <div class="font-semibold text-sm">Analyse de Disparité</div>
+                      <div class="text-xs text-gray-600">Audit démographique régulier</div>
+                    </div>
+                  </div>
+                  <div class="flex items-center p-3 bg-green-50 rounded-lg">
+                    <i class="fas fa-shield-alt text-green-600 mr-3"></i>
+                    <div>
+                      <div class="font-semibold text-sm">Contraintes d&#39;Équité</div>
+                      <div class="text-xs text-gray-600">Optimisation sous contraintes de fairness</div>
+                    </div>
+                  </div>
+                  <div class="flex items-center p-3 bg-purple-50 rounded-lg">
+                    <i class="fas fa-eye text-purple-600 mr-3"></i>
+                    <div>
+                      <div class="font-semibold text-sm">Transparence</div>
+                      <div class="text-xs text-gray-600">Droit à l&#39;explication RGPD</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="highlight-box">
+              <h4 class="font-canela text-xl font-semibold mb-3">Métriques de Fairness</h4>
+              <div class="grid grid-cols-2 gap-6">
+                <div>
+                  <h5 class="font-semibold mb-2">Demographic Parity</h5>
+                  <p class="text-sm text-gray-700 mb-2">Égalité des taux de recommandation entre groupes</p>
+                  <div class="text-xs text-gray-600">P(Ŷ=1|A=0) = P(Ŷ=1|A=1)</div>
+                </div>
+                <div>
+                  <h5 class="font-semibold mb-2">Equalized Odds</h5>
+                  <p class="text-sm text-gray-700 mb-2">Égalité des taux d&#39;erreur par groupe</p>
+                  <div class="text-xs text-gray-600">P(Ŷ=1|Y=y,A=0) = P(Ŷ=1|Y=y,A=1)</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="section-card">
+            <h3 class="font-canela text-2xl font-semibold mb-4">Scalabilité et Performance Opérationnelle</h3>
+
+            <div class="grid grid-cols-3 gap-6 mb-8">
+              <div class="metric-card">
+                <div class="text-3xl font-bold text-blue-600 mb-2">&lt; 1 ms</div>
+                <div class="text-sm text-gray-600">Recherche approximative ANN</div>
+              </div>
+              <div class="metric-card">
+                <div class="text-3xl font-bold text-green-600 mb-2">99%</div>
+                <div class="text-sm text-gray-600">Rappel avec HNSW</div>
+              </div>
+              <div class="metric-card">
+                <div class="text-3xl font-bold text-purple-600 mb-2">10⁸</div>
+                <div class="text-sm text-gray-600">Vecteurs indexables</div>
+              </div>
+            </div>
+
+            <h4 class="font-canela text-xl font-semibold mb-4">Architecture Cloud-Native</h4>
+
+            <div class="mermaid-container">
+              <div class="mermaid-controls">
+                <button class="mermaid-control-btn zoom-in" title="放大">
+                  <i class="fas fa-search-plus"></i>
+                </button>
+                <button class="mermaid-control-btn zoom-out" title="缩小">
+                  <i class="fas fa-search-minus"></i>
+                </button>
+                <button class="mermaid-control-btn reset-zoom" title="重置">
+                  <i class="fas fa-expand-arrows-alt"></i>
+                </button>
+                <button class="mermaid-control-btn fullscreen" title="全屏查看">
+                  <i class="fas fa-expand"></i>
+                </button>
+              </div>
+              <div class="mermaid">
+                graph TD
+                A[&#34;Sources Données&#34;] --&gt; B[&#34;Kafka/Kinesis&#34;]
+                B --&gt; C[&#34;Spark/Flink&#34;]
+                C --&gt; D[&#34;Entraînement ML&#34;]
+                D --&gt; E[&#34;Modèles Versionnés&#34;]
+                E --&gt; F[&#34;K8s Serving&#34;]
+                F --&gt; G[&#34;API Gateway&#34;]
+                G --&gt; H[&#34;Applications&#34;]
+
+                style A fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#1e293b
+                style B fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e293b
+                style C fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#1e293b
+                style D fill:#fce7f3,stroke:#be185d,stroke-width:2px,color:#1e293b
+                style E fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#1e293b
+                style F fill:#e8f5e8,stroke:#388e3c,stroke-width:2px,color:#1e293b
+                style G fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#1e293b
+                style H fill:#f1f8e9,stroke:#689f38,stroke-width:2px,color:#1e293b
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-8">
+              <div>
+                <h4 class="font-semibold mb-3">Optimisation Latence vs. Précision</h4>
+                <p class="text-gray-700 mb-4">
+                  L&#39;architecture en cascade combine plusieurs niveaux de traitement pour équilibrer
+                  rapidité et qualité des résultats.
+                </p>
+
+                <div class="space-y-2 text-sm">
+                  <div class="flex justify-between items-center p-2 bg-gray-50 rounded">
+                    <span>Cache</span>
+                    <span class="font-mono">&lt; 1 ms</span>
+                  </div>
+                  <div class="flex justify-between items-center p-2 bg-gray-50 rounded">
+                    <span>Index ANN</span>
+                    <span class="font-mono">1-10 ms</span>
+                  </div>
+                  <div class="flex justify-between items-center p-2 bg-gray-50 rounded">
+                    <span>Re-ranking Léger</span>
+                    <span class="font-mono">10-100 ms</span>
+                  </div>
+                  <div class="flex justify-between items-center p-2 bg-gray-50 rounded">
+                    <span>Re-ranking Lourd</span>
+                    <span class="font-mono">100 ms - 1 s</span>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <h4 class="font-semibold mb-3">Gouvernance des Données</h4>
+                <p class="text-gray-700 mb-4">
+                  La qualité des données est le facteur limitant le plus critique pour la performance
+                  des systèmes de matching.
+                </p>
+
+                <div class="space-y-2">
+                  <div class="flex justify-between text-sm">
+                    <span>Complétude</span>
+                    <span class="text-green-600 font-semibold">&gt;90%</span>
+                  </div>
+                  <div class="flex justify-between text-sm">
+                    <span>Exactitude</span>
+                    <span class="text-green-600 font-semibold">&gt;95%</span>
+                  </div>
+                  <div class="flex justify-between text-sm">
+                    <span>Fraîcheur</span>
+                    <span class="text-yellow-600 font-semibold">&lt;6 mois</span>
+                  </div>
+                  <div class="flex justify-between text-sm">
+                    <span>Cohérence</span>
+                    <span class="text-yellow-600 font-semibold">&lt;2%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tendances Émergentes -->
+      <section id="tendances-emergentes" class="py-12 px-8 bg-gray-50">
+        <div class="container mx-auto max-w-6xl">
+          <h2 class="font-canela text-4xl font-bold mb-8 text-center">5. Tendances Émergentes et Perspectives</h2>
+
+          <div class="section-card">
+            <h3 class="font-canela text-2xl font-semibold mb-4">Grands Modèles de Langage et Génération Augmentée</h3>
+
+            <div class="grid grid-cols-2 gap-8 mb-8">
+              <div>
+                <h4 class="font-semibold mb-3">Capacités Nouvelles des LLM</h4>
+                <div class="space-y-4">
+                  <div class="flex items-start p-3 bg-blue-50 rounded-lg">
+                    <i class="fas fa-brain text-blue-600 mr-3 mt-1"></i>
+                    <div>
+                      <div class="font-semibold text-sm">Compréhension Contextuelle Étendue</div>
+                      <div class="text-xs text-gray-600">Analyse de CV longs et complexes, synthèse de carrières</div>
+                    </div>
+                  </div>
+                  <div class="flex items-start p-3 bg-green-50 rounded-lg">
+                    <i class="fas fa-lightbulb text-green-600 mr-3 mt-1"></i>
+                    <div>
+                      <div class="font-semibold text-sm">Raisonnement Inférentiel</div>
+                      <div class="text-xs text-gray-600">Déduction de compétences implicites et soft skills</div>
+                    </div>
+                  </div>
+                  <div class="flex items-start p-3 bg-purple-50 rounded-lg">
+                    <i class="fas fa-comments text-purple-600 mr-3 mt-1"></i>
+                    <div>
+                      <div class="font-semibold text-sm">Interaction Conversationnelle</div>
+                      <div class="text-xs text-gray-600">Recherche en langage naturel et affinement itératif</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <img src="https://kimi-web-img.moonshot.cn/img/res.cloudinary.com/6db7f1840853b2e1a9ab7bc57c1df501f2e81b0c.png" alt="Interface utilisateur avec chatbot d&#39;intelligence artificielle" class="rounded-lg shadow-md w-full h-64 object-cover" size="medium" aspect="wide" style="photo" query="AI chatbot interface" referrerpolicy="no-referrer" data-modified="1" data-score="0.00"/>
+              </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg border mb-8">
+              <h4 class="font-semibold mb-3">Exemple de Synthèse Explicative</h4>
+              <div class="bg-gray-50 p-4 rounded italic text-sm text-gray-700">
+                &#34;Ce candidat est fortement recommandé pour votre poste de Lead Data Engineer.
+                Ses 5 ans d&#39;expérience sur des pipelines de données à grande échelle chez [Entreprise similaire]
+                démontrent une maîtrise avérée des technologies que vous utilisez (Spark, Kafka, Airflow).
+                Son passage récent en architecture cloud (AWS certifié) prépare sa montée en responsabilité.
+                À creuser en entretien : son expérience de management est limitée à 2 personnes,
+                inférieure à vos 5 directs attendus — évaluer sa capacité de scale et son appétence pour cette dimension.&#34;
+              </div>
+            </div>
+
+            <div class="highlight-box">
+              <h4 class="font-canela text-xl font-semibold mb-3">RAG pour la Personnalisation Avancée</h4>
+              <p class="text-gray-700 mb-4">
+                La Génération Augmentée par Récupération (RAG) permet d&#39;intégrer des informations
+                contextuelles spécifiques à l&#39;organisation pour un matching plus précis et personnalisé.
+              </p>
+
+              <div class="grid grid-cols-3 gap-4">
+                <div class="text-center">
+                  <i class="fas fa-user-friends text-3xl text-blue-600 mb-2"></i>
+                  <div class="font-semibold text-sm">Fit Culturel</div>
+                  <div class="text-xs text-gray-600">Alignement valeurs et personnalité</div>
+                </div>
+                <div class="text-center">
+                  <i class="fas fa-chart-line text-3xl text-green-600 mb-2"></i>
+                  <div class="font-semibold text-sm">Performance Prédite</div>
+                  <div class="text-xs text-gray-600">Patterns des top performers</div>
+                </div>
+                <div class="text-center">
+                  <i class="fas fa-users text-3xl text-purple-600 mb-2"></i>
+                  <div class="font-semibold text-sm">Diversité Cognitive</div>
+                  <div class="text-xs text-gray-600">Complémentarité d&#39;équipe</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="section-card">
+            <h3 class="font-canela text-2xl font-semibold mb-4">Perspectives et Défis Futurs</h3>
+
+            <div class="grid grid-cols-2 gap-8">
+              <div>
+                <h4 class="font-semibold mb-3">Défis Techniques</h4>
+                <div class="space-y-3">
+                  <div class="p-3 bg-red-50 rounded-lg border-l-4 border-red-400">
+                    <div class="font-medium text-sm">Complexité Computationnelle</div>
+                    <div class="text-xs text-gray-600">Gestion des coûts d&#39;inférence des LLM à grande échelle</div>
+                  </div>
+                  <div class="p-3 bg-orange-50 rounded-lg border-l-4 border-orange-400">
+                    <div class="font-medium text-sm">Qualité et Biais des Données</div>
+                    <div class="text-xs text-gray-600">Besoin croissant de données de qualité et diversifiées</div>
+                  </div>
+                  <div class="p-3 bg-yellow-50 rounded-lg border-l-4 border-yellow-400">
+                    <div class="font-medium text-sm">Interprétabilité Avancée</div>
+                    <div class="text-xs text-gray-600">Explication de décisions complexes basées sur LLM</div>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <h4 class="font-semibold mb-3">Opportunités Stratégiques</h4>
+                <div class="space-y-3">
+                  <div class="p-3 bg-blue-50 rounded-lg border-l-4 border-blue-400">
+                    <div class="font-medium text-sm">Hyper-Personnalisation</div>
+                    <div class="text-xs text-gray-600">Matching individualisé au niveau du poste et de l&#39;organisation</div>
+                  </div>
+                  <div class="p-3 bg-green-50 rounded-lg border-l-4 border-green-400">
+                    <div class="font-medium text-sm">Prédiction de Succès</div>
+                    <div class="text-xs text-gray-600">Optimisation pour la performance et la rétention à long terme</div>
+                  </div>
+                  <div class="p-3 bg-purple-50 rounded-lg border-l-4 border-purple-400">
+                    <div class="font-medium text-sm">Innovation d&#39;Équipe</div>
+                    <div class="text-xs text-gray-600">Optimisation de la synergie et de la diversité cognitive</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-8 p-6 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg border">
+              <h4 class="font-canela text-xl font-semibold mb-3">Conclusion Stratégique</h4>
+              <p class="text-gray-700">
+                L&#39;appariement du capital humain par IA représente une transformation fondamentale
+                du recrutement et de la gestion des talents. Les organisations qui investissent
+                dans ces technologies bénéficient d&#39;un avantage compétitif significatif,
+                avec des réductions substantielles du time-to-hire et des améliorations
+                marquées de la qualité des recrutements.
+                <a href="https://x0pa.com/glossary/predictive-job-matching/" class="citation" target="_blank">[116]</a>
+                <a href="https://www.smartrecruiters.com/recruiting-software/talent-matching/" class="citation" target="_blank">[121]</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="py-8 px-8 bg-gray-900 text-white">
+        <div class="container mx-auto max-w-6xl">
+          <div class="grid grid-cols-3 gap-8">
+            <div>
+              <h3 class="font-canela text-xl font-semibold mb-4">Références Clés</h3>
+              <div class="space-y-2 text-sm">
+                <a href="https://ulopenaccess.com/papers/ULETE_V02I04/ULETE20250204_004.pdf" class="block hover:text-blue-300" target="_blank">[108] Graph Neural Networks for Candidate Matching</a>
+                <a href="https://www.sciencedirect.com/org/science/article/pii/S1546223425000097" class="block hover:text-blue-300" target="_blank">[109] GPT-4o for Resume Feature Extraction</a>
+                <a href="https://iaeme.com/MasterAdmin/Journal_uploads/IJITMIS/VOLUME_16_ISSUE_1/IJITMIS_16_01_080.pdf" class="block hover:text-blue-300" target="_blank">[76] Domain-Adaptive Pre-training for HR</a>
+                <a href="https://x0pa.com/glossary/predictive-job-matching/" class="block hover:text-blue-300" target="_blank">[116] Predictive Job Matching Impact</a>
+              </div>
+            </div>
+            <div>
+              <h3 class="font-canela text-xl font-semibold mb-4">Métriques Clés</h3>
+              <div class="space-y-2 text-sm">
+                <div>NDCG@10: 0.75-0.85</div>
+                <div>Balanced Accuracy (GNN): 65.4%</div>
+                <div>Time-to-hire Reduction: 40-60%</div>
+                <div>Quality-of-hire Improvement: +20-35%</div>
+              </div>
+            </div>
+            <div>
+              <h3 class="font-canela text-xl font-semibold mb-4">Technologies Principales</h3>
+              <div class="space-y-2 text-sm">
+                <div>Transformers &amp; BERT</div>
+                <div>Graph Neural Networks</div>
+                <div>Approximate Nearest Neighbors</div>
+                <div>Large Language Models</div>
+              </div>
+            </div>
+          </div>
+          <div class="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-gray-400">
+            <p>© 2025 État de l&#39;Art de l&#39;Appariement du Capital Humain. Analyse technique et perspectives stratégiques.</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+        // Initialize Mermaid with enhanced configuration
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#ffffff',
+                primaryTextColor: '#1e293b',
+                primaryBorderColor: '#334155',
+                lineColor: '#64748b',
+                secondaryColor: '#f1f5f9',
+                tertiaryColor: '#f8fafc',
+                background: '#ffffff',
+                mainBkg: '#ffffff',
+                secondBkg: '#f8fafc',
+                tertiaryBkg: '#f1f5f9',
+                nodeBorder: '#334155',
+                clusterBkg: '#f8fafc',
+                clusterBorder: '#e2e8f0',
+                defaultLinkColor: '#64748b',
+                titleColor: '#1e293b',
+                edgeLabelBackground: '#ffffff',
+                nodeTextColor: '#1e293b',
+                // Enhanced contrast settings
+                cScale0: '#dbeafe',
+                cScale1: '#dcfce7', 
+                cScale2: '#fef3c7',
+                cScale3: '#fce7f3',
+                cScale4: '#f3e5f5',
+                cScale5: '#e8f5e8',
+                cScale6: '#fff3e0',
+                cScale7: '#fce4ec'
+            },
+            flowchart: {
+                useMaxWidth: false,
+                htmlLabels: true,
+                curve: 'basis',
+                padding: 20
+            },
+            sequence: {
+                useMaxWidth: false,
+                padding: 20
+            },
+            gantt: {
+                useMaxWidth: false,
+                padding: 20
+            },
+            // Security and rendering settings
+            securityLevel: 'loose',
+            fontSize: 14,
+            fontFamily: 'Inter, sans-serif'
+        });
+
+        // Initialize Mermaid Controls for zoom and pan
+        function initializeMermaidControls() {
+            const containers = document.querySelectorAll('.mermaid-container');
+
+            containers.forEach(container => {
+            const mermaidElement = container.querySelector('.mermaid');
+            let scale = 1;
+            let isDragging = false;
+            let startX, startY, translateX = 0, translateY = 0;
+
+            // 触摸相关状态
+            let isTouch = false;
+            let touchStartTime = 0;
+            let initialDistance = 0;
+            let initialScale = 1;
+            let isPinching = false;
+
+            // Zoom controls
+            const zoomInBtn = container.querySelector('.zoom-in');
+            const zoomOutBtn = container.querySelector('.zoom-out');
+            const resetBtn = container.querySelector('.reset-zoom');
+            const fullscreenBtn = container.querySelector('.fullscreen');
+
+            function updateTransform() {
+                mermaidElement.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+
+                if (scale > 1) {
+                container.classList.add('zoomed');
+                } else {
+                container.classList.remove('zoomed');
+                }
+
+                mermaidElement.style.cursor = isDragging ? 'grabbing' : 'grab';
+            }
+
+            if (zoomInBtn) {
+                zoomInBtn.addEventListener('click', () => {
+                scale = Math.min(scale * 1.25, 4);
+                updateTransform();
+                });
+            }
+
+            if (zoomOutBtn) {
+                zoomOutBtn.addEventListener('click', () => {
+                scale = Math.max(scale / 1.25, 0.3);
+                if (scale <= 1) {
+                    translateX = 0;
+                    translateY = 0;
+                }
+                updateTransform();
+                });
+            }
+
+            if (resetBtn) {
+                resetBtn.addEventListener('click', () => {
+                scale = 1;
+                translateX = 0;
+                translateY = 0;
+                updateTransform();
+                });
+            }
+
+            if (fullscreenBtn) {
+                fullscreenBtn.addEventListener('click', () => {
+                if (container.requestFullscreen) {
+                    container.requestFullscreen();
+                } else if (container.webkitRequestFullscreen) {
+                    container.webkitRequestFullscreen();
+                } else if (container.msRequestFullscreen) {
+                    container.msRequestFullscreen();
+                }
+                });
+            }
+
+            // Mouse Events
+            mermaidElement.addEventListener('mousedown', (e) => {
+                if (isTouch) return; // 如果是触摸设备，忽略鼠标事件
+
+                isDragging = true;
+                startX = e.clientX - translateX;
+                startY = e.clientY - translateY;
+                mermaidElement.style.cursor = 'grabbing';
+                updateTransform();
+                e.preventDefault();
+            });
+
+            document.addEventListener('mousemove', (e) => {
+                if (isDragging && !isTouch) {
+                translateX = e.clientX - startX;
+                translateY = e.clientY - startY;
+                updateTransform();
+                }
+            });
+
+            document.addEventListener('mouseup', () => {
+                if (isDragging && !isTouch) {
+                isDragging = false;
+                mermaidElement.style.cursor = 'grab';
+                updateTransform();
+                }
+            });
+
+            document.addEventListener('mouseleave', () => {
+                if (isDragging && !isTouch) {
+                isDragging = false;
+                mermaidElement.style.cursor = 'grab';
+                updateTransform();
+                }
+            });
+
+            // 获取两点之间的距离
+            function getTouchDistance(touch1, touch2) {
+                return Math.hypot(
+                touch2.clientX - touch1.clientX,
+                touch2.clientY - touch1.clientY
+                );
+            }
+
+            // Touch Events - 触摸事件处理
+            mermaidElement.addEventListener('touchstart', (e) => {
+                isTouch = true;
+                touchStartTime = Date.now();
+
+                if (e.touches.length === 1) {
+                // 单指拖动
+                isPinching = false;
+                isDragging = true;
+
+                const touch = e.touches[0];
+                startX = touch.clientX - translateX;
+                startY = touch.clientY - translateY;
+
+                } else if (e.touches.length === 2) {
+                // 双指缩放
+                isPinching = true;
+                isDragging = false;
+
+                const touch1 = e.touches[0];
+                const touch2 = e.touches[1];
+                initialDistance = getTouchDistance(touch1, touch2);
+                initialScale = scale;
+                }
+
+                e.preventDefault();
+            }, { passive: false });
+
+            mermaidElement.addEventListener('touchmove', (e) => {
+                if (e.touches.length === 1 && isDragging && !isPinching) {
+                // 单指拖动
+                const touch = e.touches[0];
+                translateX = touch.clientX - startX;
+                translateY = touch.clientY - startY;
+                updateTransform();
+
+                } else if (e.touches.length === 2 && isPinching) {
+                // 双指缩放
+                const touch1 = e.touches[0];
+                const touch2 = e.touches[1];
+                const currentDistance = getTouchDistance(touch1, touch2);
+
+                if (initialDistance > 0) {
+                    const newScale = Math.min(Math.max(
+                    initialScale * (currentDistance / initialDistance),
+                    0.3
+                    ), 4);
+                    scale = newScale;
+                    updateTransform();
+                }
+                }
+
+                e.preventDefault();
+            }, { passive: false });
+
+            mermaidElement.addEventListener('touchend', (e) => {
+                // 重置状态
+                if (e.touches.length === 0) {
+                isDragging = false;
+                isPinching = false;
+                initialDistance = 0;
+
+                // 延迟重置isTouch，避免鼠标事件立即触发
+                setTimeout(() => {
+                    isTouch = false;
+                }, 100);
+                } else if (e.touches.length === 1 && isPinching) {
+                // 从双指变为单指，切换为拖动模式
+                isPinching = false;
+                isDragging = true;
+
+                const touch = e.touches[0];
+                startX = touch.clientX - translateX;
+                startY = touch.clientY - translateY;
+                }
+
+                updateTransform();
+            });
+
+            mermaidElement.addEventListener('touchcancel', (e) => {
+                isDragging = false;
+                isPinching = false;
+                initialDistance = 0;
+
+                setTimeout(() => {
+                isTouch = false;
+                }, 100);
+
+                updateTransform();
+            });
+
+            // Enhanced wheel zoom with better center point handling
+            container.addEventListener('wheel', (e) => {
+                e.preventDefault();
+                const rect = container.getBoundingClientRect();
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const delta = e.deltaY > 0 ? 0.9 : 1.1;
+                const newScale = Math.min(Math.max(scale * delta, 0.3), 4);
+
+                // Adjust translation to zoom towards center
+                if (newScale !== scale) {
+                const scaleDiff = newScale / scale;
+                translateX = translateX * scaleDiff;
+                translateY = translateY * scaleDiff;
+                scale = newScale;
+
+                if (scale <= 1) {
+                    translateX = 0;
+                    translateY = 0;
+                }
+
+                updateTransform();
+                }
+            });
+
+            // Initialize display
+            updateTransform();
+            });
+        }
+
+        // Initialize mermaid controls when DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeMermaidControls();
+        });
+
+        // Table of Contents Active Link Tracking
+        const tocLinks = document.querySelectorAll('.toc-link');
+        const sections = document.querySelectorAll('section[id]');
+
+        function updateActiveLink() {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            tocLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', updateActiveLink);
+        updateActiveLink();
+
+        // Smooth scrolling for TOC links
+        tocLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').substring(1);
+                const targetSection = document.getElementById(targetId);
+                if (targetSection) {
+                    targetSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Citation hover effects
+        document.querySelectorAll('.citation').forEach(citation => {
+            citation.addEventListener('mouseenter', () => {
+                citation.style.transform = 'translateY(-2px)';
+                citation.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
+            });
+            
+            citation.addEventListener('mouseleave', () => {
+                citation.style.transform = 'translateY(0)';
+                citation.style.boxShadow = 'none';
+            });
+        });
+
+        // Metric card hover effects
+        document.querySelectorAll('.metric-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-4px)';
+                card.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.15)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+                card.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.1)';
+            });
+        });
+    </script>
+  
+
+</body>
+</html>
